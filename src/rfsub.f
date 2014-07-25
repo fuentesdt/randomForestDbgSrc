@@ -69,6 +69,12 @@ c     start main loop
       do 30 kbuild = 1, nrnodes
 c         call intpr("kbuild", 6, kbuild, 1)
 c         call intpr("ncur", 4, ncur, 1)
+         write(*,'(7(a,I8,x))') 
+     1         'kbuild',kbuild,'ncur',ncur,
+     2         'nodestatus(kbuild)',nodestatus(kbuild) ,
+     3         'nodestart(kbuild)',nodestart(kbuild) ,
+     4         'nodepop(kbuild)',nodepop(kbuild) ,
+     5         'mtry',mtry
          if (kbuild .gt. ncur) goto 50
          if (nodestatus(kbuild) .ne. 2) goto 30
 c     initialize for next call to findbestsplit
@@ -102,6 +108,10 @@ c     If the node is terminal, move on.  Otherwise, split.
             endif
          endif
 
+         write(*,'(4(a,I8,x))') 
+     1         'jstat',jstat,'mred',mred,
+     2         'bestsplit(kbuild)',bestsplit(kbuild),
+     3         'bestsplitnext(kbuild)',bestsplitnext(kbuild)
          call movedata(a,ta,mdim,nsample,ndstart,ndend,idmove,ncase,
      1        msplit,cat,best,ndendl)
 c         call intpr("ndend", 5, ndend, 1)
@@ -326,6 +336,9 @@ c     right if it belongs to the right child.
      1     ncase(nsample),cat(mdim),icat(53)
 
 c     compute idmove=indicator of case nos. going left
+      write(*,'(7(a,I8,x))') 
+     1    'mdim',mdim,'nsample',nsample,'ndstart',ndstart,'ndend',ndend,
+     2    'best',int(best),'ndendl',ndendl,'msplit',msplit
 
       if (cat(msplit).eq.1) then
          do nsp=ndstart,int(best)

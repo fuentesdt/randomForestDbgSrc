@@ -234,6 +234,7 @@ void classRF(double *x, int *dimx, int *cl, int *ncl, int *cat, int *maxcat,
     idxByNnode = 0;
     idxByNsample = 0;
     for (jb = 0; jb < Ntree; jb++) {
+	Rprintf("building tree %d of %d   ",jb,Ntree);
         /* Do we need to simulate data for the second class? */
         if (addClass) createClass(x, nsample0, nsample, mdim);
 		do {
@@ -327,6 +328,7 @@ void classRF(double *x, int *dimx, int *cl, int *ncl, int *cat, int *maxcat,
 			memcpy(a, at, sizeof(int) * mdim * nsample);
       	    modA(a, &nuse, nsample, mdim, cat, *maxcat, ncase, jin);
 
+	    Rprintf("nsample %d mdim %d mtry %d nuse %d ",nsample,mdim,mtry,nuse);
 			F77_CALL(buildtree)(a, b, cl, cat, maxcat, &mdim, &nsample,
 								&nclass,
 								treemap + 2*idxByNnode, bestvar + idxByNnode,
@@ -337,6 +339,7 @@ void classRF(double *x, int *dimx, int *cl, int *ncl, int *cat, int *maxcat,
 								&mtry, varUsed, nodeclass + idxByNnode,
 								ndbigtree + jb, win, wr, wl, &mdim,
 								&nuse, mind);
+	    Rprintf("#nodes = %d \n ",ndbigtree[jb] );
 			/* if the "tree" has only the root node, start over */
 		} while (ndbigtree[jb] == 1);
 

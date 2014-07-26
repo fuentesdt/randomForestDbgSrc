@@ -1,0 +1,38 @@
+
+Example Install
+=====
+
+$ make
+echo installing to /opt/apps/ANTsR/dev/
+installing to /opt/apps/ANTsR/dev/
+R CMD INSTALL -d .
+processing ‘.’
+a directory
+* installing to library ‘/opt/apps/ANTsR/dev’
+* build_help_types=
+* DBG: 'R CMD INSTALL' now doing do_install()
+* created lock directory ‘/opt/apps/ANTsR/dev/00LOCK-randomForestDbgSrc’
+* installing *source* package ‘randomForest’ ...
+files ‘src/rf.c’, ‘src/rfsub.f’ have the wrong MD5 checksums
+** backing up earlier installation
+** libs
+about to run R CMD SHLIB -o randomForest.so classTree.c regTree.c regrf.c rf.c rfsub.f rfutils.c
+make[1]: Entering directory `/opt/apps/ANTsR/dev/randomForestDbgSrc/src'
+gcc -std=gnu99 -I/usr/share/R/include -DNDEBUG      -fpic  -O3 -pipe  -g  -c classTree.c -o classTree.o
+gcc -std=gnu99 -I/usr/share/R/include -DNDEBUG      -fpic  -O3 -pipe  -g  -c regTree.c -o regTree.o
+gcc -std=gnu99 -I/usr/share/R/include -DNDEBUG      -fpic  -O3 -pipe  -g  -c regrf.c -o regrf.o
+gcc -std=gnu99 -I/usr/share/R/include -DNDEBUG      -fpic  -O3 -pipe  -g  -c rf.c -o rf.o
+gfortran   -fpic  -O3 -pipe  -g  -c rfsub.f -o rfsub.o
+gcc -std=gnu99 -I/usr/share/R/include -DNDEBUG      -fpic  -O3 -pipe  -g  -c rfutils.c -o rfutils.o
+gcc -std=gnu99 -shared -o randomForest.so classTree.o regTree.o regrf.o rf.o rfsub.o rfutils.o -lgfortran -lm -lquadmath -L/usr/lib/R/lib -lR
+make[1]: Leaving directory `/opt/apps/ANTsR/dev/randomForestDbgSrc/src'
+installing to /opt/apps/ANTsR/dev/randomForest/libs
+** R
+** data
+** inst
+** preparing package for lazy loading
+** help
+*** installing help indices
+** building package indices
+** testing if installed package can be loaded
+* DONE (randomForest)

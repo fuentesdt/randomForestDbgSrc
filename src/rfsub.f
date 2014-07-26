@@ -69,12 +69,11 @@ c     start main loop
       do 30 kbuild = 1, nrnodes
 c         call intpr("kbuild", 6, kbuild, 1)
 c         call intpr("ncur", 4, ncur, 1)
-         write(*,'(7(a,I8,x))') 
-     1         'kbuild',kbuild,'ncur',ncur,'nuse',nuse,
-     2         'nodestatus(kbuild)',nodestatus(kbuild) ,
-     3         'nodestart(kbuild)',nodestart(kbuild) ,
-     4         'nodepop(kbuild)',nodepop(kbuild) ,
-     5         'mtry',mtry
+c        write(*,'(5(a,I8,x))') 
+c    1         'kbuild',kbuild,'ncur',ncur,
+c    2         'nodestatus(kbuild)',nodestatus(kbuild) ,
+c    3         'nodestart(kbuild)',nodestart(kbuild) ,
+c    4         'nodepop(kbuild)',nodepop(kbuild) 
          if (kbuild .gt. ncur) goto 50
          if (nodestatus(kbuild) .ne. 2) goto 30
 c     initialize for next call to findbestsplit
@@ -108,15 +107,12 @@ c     If the node is terminal, move on.  Otherwise, split.
             endif
          endif
 
-         write(*,'(4(a,I8,x))') 
-     1         'jstat',jstat,'mred',mred,
-     2         'bestsplit(kbuild)',bestsplit(kbuild),
-     3         'bestsplitnext(kbuild)',bestsplitnext(kbuild)
          call movedata(a,ta,mdim,nsample,ndstart,ndend,idmove,ncase,
      1        msplit,cat,best,ndendl)
-         write(*,'(7(a,I8,x))') 
-     1    'mdim',mdim,'nsample',nsample,'ndstart',ndstart,
-     2    'ndendl',ndendl,'ndend',ndend,'best',int(best),'msplit',msplit
+c        write(*,'(6(a,I8,x))') 
+c    1   'ndstart',ndstart,'ndendl',ndendl,'ndend',ndend,
+c    2   'msplit',msplit,'bestsplit(kbuild)',bestsplit(kbuild),
+c    3                   'bestsplitnext(kbuild)',bestsplitnext(kbuild)
 c         call intpr("ndend", 5, ndend, 1)
 c         call intpr("ndendl", 6, ndendl, 1)
 c     leftnode no.= ncur+1, rightnode no. = ncur+2.
